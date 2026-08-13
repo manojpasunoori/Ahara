@@ -1,15 +1,6 @@
-export type ApiHealth = {
-  status: "healthy" | "degraded" | "unhealthy";
-  service: string;
-  version: string;
-  database: "healthy" | "unhealthy";
-  redis: "healthy" | "unhealthy";
-};
-
-const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
-
-export async function getApiHealth(): Promise<ApiHealth> {
-  const response = await fetch(`${apiUrl}/api/v1/health`, { cache: "no-store" });
-  if (!response.ok) throw new Error(`API health check failed: ${response.status}`);
-  return (await response.json()) as ApiHealth;
-}
+export type User={id:string;display_name:string;email:string;country?:string;city?:string;state_or_region?:string}; export type Cuisine={id:string;name:string}; export type Profile={diet_type:string;spice_tolerance:number;adventurousness:number;usual_budget_min:string;usual_budget_max:string;usual_travel_radius_miles:string;dining_preferences:string[];cuisine_preferences:{name:string;preference_level:number}[];comfort_foods:string[];allergies:{name:string;notes?:string}[]};
+const base=process.env.NEXT_PUBLIC_API_URL??'http://localhost:8000';
+async function req<T>(path:string, init?:RequestInit):Promise<T>{const r=await fetch(base+path,{...init,headers:{'Content-Type':'application/json',...init?.headers}});if(!r.ok)throw new Error(r.status===409?'That email already has an Ahara profile.':'Ahara cannot reach its local service right now.');return r.json() as Promise<T>}
+export const api={cuisines:()=>req<Cuisine[]>('/api/v1/cuisines'),user:(id:string)=>req<User>('/api/v1/users/'+id),profile:(id:string)=>req<Profile>('/api/v1/users/'+id+'/food-profile'),onboard:(body:unknown)=>req<{user:User;food_profile:Profile}>('/api/v1/onboarding',{method:'POST',body:JSON.stringify(body)}),update:(id:string,body:unknown)=>req<Profile>('/api/v1/users/'+id+'/food-profile',{method:'PUT',body:JSON.stringify(body)})};
+export type ApiHealth = { status: "healthy" | "degraded" | "unhealthy"; service: string; version: string; database: "healthy" | "unhealthy"; redis: "healthy" | "unhealthy"; };
+export async function getApiHealth(): Promise<ApiHealth> { return req<ApiHealth>("/api/v1/health"); }
