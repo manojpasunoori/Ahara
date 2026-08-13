@@ -107,3 +107,26 @@ scripts/     Future development scripts
 1. Foundation and local development infrastructure (current)
 2. Domain data model and application workflows
 3. AI, Ollama/Qwen, and context-aware recommendation capabilities
+
+## Personalization foundation
+
+Prompt 2 adds PostgreSQL-backed users, food profiles, normalized cuisine preferences, comfort foods, allergy notes, dining modes, and a future recommendation-interaction record. There is no authentication or recommendation behavior.
+
+Apply migrations from the API directory (or use Docker):
+
+```powershell
+alembic upgrade head
+alembic current
+alembic downgrade -1
+# Docker:
+docker compose exec api alembic upgrade head
+docker compose exec api python -m app.scripts.seed_demo
+```
+
+Create a profile atomically:
+
+```powershell
+Invoke-RestMethod -Method Post http://localhost:8000/api/v1/onboarding -ContentType 'application/json' -Body '{"display_name":"Manoj","email":"manoj.demo@ahara.local","diet_type":"omnivore","spice_tolerance":5,"adventurousness":3,"usual_budget_min":10,"usual_budget_max":30,"usual_travel_radius_miles":20,"dining_preferences":["delivery","pickup","dine_in"],"cuisine_preferences":[{"name":"South Indian","preference_level":5}],"comfort_foods":["Biryani"],"allergies":[]}'
+```
+
+Profile routes: `GET /api/v1/users/{user_id}`, `GET`/`PUT /api/v1/users/{user_id}/food-profile`, and `GET /api/v1/cuisines`.

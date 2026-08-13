@@ -1,1 +1,2 @@
-"""Database models will be added with the first domain data model."""
+from app.models.profile import Allergy, ComfortFood, Cuisine, FoodProfile, RecommendationInteraction, User, UserAllergy, UserComfortFood, UserCuisinePreference
+__all__ = ["Allergy", "ComfortFood", "Cuisine", "FoodProfile", "RecommendationInteraction", "User", "UserAllergy", "UserComfortFood", "UserCuisinePreference"]

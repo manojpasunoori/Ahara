@@ -8,6 +8,8 @@ WORKDIR /app
 RUN addgroup --system ahara && adduser --system --ingroup ahara ahara
 COPY pyproject.toml ./
 COPY app ./app
+COPY alembic ./alembic
+COPY alembic.ini ./
 RUN pip install --upgrade pip && pip install .
 
 USER ahara

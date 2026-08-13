@@ -5,6 +5,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.routes import router
+from app.api.profile import router as profile_router
 from app.core.cache import create_redis_client
 from app.core.config import get_settings
 from app.core.database import create_database_engine
@@ -31,10 +32,11 @@ def create_app() -> FastAPI:
         CORSMiddleware,
         allow_origins=settings.cors_origins,
         allow_credentials=True,
-        allow_methods=["GET"],
+        allow_methods=["GET", "POST", "PUT", "OPTIONS"],
         allow_headers=["Content-Type"],
     )
     application.include_router(router)
+    application.include_router(profile_router)
     return application
 
 
