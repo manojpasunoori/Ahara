@@ -1,0 +1,11 @@
+from redis import Redis
+
+from app.core.config import get_settings
+
+
+def create_redis_client() -> Redis:
+    return Redis.from_url(get_settings().redis_url, decode_responses=True)
+
+
+def check_redis_connection(client: Redis) -> None:
+    client.ping()
