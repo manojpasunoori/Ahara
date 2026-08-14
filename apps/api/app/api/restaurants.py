@@ -37,6 +37,8 @@ def _provider() -> PlacesProvider:
         return DemoPlacesProvider()
     if settings.places_provider.casefold() != "foursquare":
         raise PlacesProviderUnavailableError("Live restaurant search is not configured.")
+    if not settings.foursquare_api_key.strip():
+        return DemoPlacesProvider()
     return FoursquarePlacesProvider(settings.foursquare_api_key)
 
 
