@@ -13,6 +13,10 @@ class Settings(BaseSettings):
     ahara_mode: str = "live"
     places_provider: str = "foursquare"
     foursquare_api_key: str = ""
+    llm_provider: str = "ollama"
+    ollama_base_url: str = "http://host.docker.internal:11434"
+    ollama_model: str = "qwen3:8b"
+    ollama_timeout_seconds: float = 90
     api_host: str = "0.0.0.0"
     api_port: int = 8000
     api_version: str = "0.1.0"

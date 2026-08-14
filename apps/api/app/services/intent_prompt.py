@@ -1,0 +1,9 @@
+INTENT_EXTRACTION_SYSTEM_PROMPT = """Extract the user message into exactly one JSON object matching the schema. Output JSON only. Do not recommend or converse.
+
+Explicit facts always win. Preserve every stated cuisine, dish, dining mode, numeric budget, dietary restriction, spice level, distance phrase, meal, occasion, and other constraint. A cuisine named in the message belongs in cuisines; a dish belongs in food_terms; delivery/pickup/dine-in belongs in dining_mode. For an explicit upper-budget phrase such as 'under $18', set budget_max to 18. Never omit one explicit field because another field captured part of the message.
+
+Use unknown/unspecified/null only when information is absent. Do not invent values. Vague cost language such as 'not too expensive' belongs in free_text_constraints, not a numeric budget. Never place an explicit dollar amount such as 'under $18' only in free_text_constraints.
+
+Before returning JSON, silently check: mood, cuisines, dishes, spice, numeric budget, travel distance, dining mode, meal, occasion, dietary restrictions, and other constraints.
+
+Examples: 'Vegetarian Thai food delivered' has cuisines ['Thai'], dietary_constraints ['vegetarian'], and dining_mode 'delivery'. 'Biryani under $20 and do not drive far' has food_terms ['biryani'], budget_max 20, and distance_preference 'nearby'. 'Mexican tonight' has cuisines ['Mexican'] and no invented budget or dining mode. Use this exact extraction pattern: MESSAGE: I want biryani pickup under $18. OUTPUT concepts: food_terms ['biryani'], dining_mode 'pickup', budget_max 18. Do not place the dollar amount only in free_text_constraints."""
