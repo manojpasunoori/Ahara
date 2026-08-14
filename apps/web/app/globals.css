@@ -15,3 +15,18 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.chips { display: flex; flex-wrap: wrap; gap: .55rem; }
+.restaurant-results { margin-top: 1.5rem; max-width: 760px; padding: 1rem 0; }
+.restaurant-results h2 { margin: 0; font-size: 1.05rem; letter-spacing: -.01em; }
+.restaurant-subtitle { color: var(--muted); margin: .35rem 0 1rem; }
+.restaurant-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
+.restaurant-card { border: 1px solid #dce3d7; border-radius: 16px; background: #fffefa; box-shadow: 0 5px 16px rgba(38, 53, 35, .05); padding: 1rem; min-width: 0; }
+.restaurant-card h3 { margin: 0; font-size: 1rem; }
+.restaurant-card p { margin: .35rem 0 0; }
+.restaurant-categories, .restaurant-address { color: var(--muted); font-size: .9rem; }
+.restaurant-distance { color: var(--accent); font-weight: 650; }
+.restaurant-meta { color: #4a5949; font-size: .875rem; }
+.restaurant-card a { color: var(--accent); display: inline-block; font-size: .875rem; margin-top: .65rem; }
+.prototype-note { color: var(--muted); margin-top: 1rem; }
+@media (max-width: 640px) { .restaurant-grid { grid-template-columns: 1fr; } .restaurant-results { width: 100%; } }

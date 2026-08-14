@@ -6,6 +6,9 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.routes import router
 from app.api.profile import router as profile_router
+from app.api.context import router as context_router
+from app.api.location import router as location_router
+from app.api.restaurants import router as restaurants_router
 from app.core.cache import create_redis_client
 from app.core.config import get_settings
 from app.core.database import create_database_engine
@@ -37,6 +40,9 @@ def create_app() -> FastAPI:
     )
     application.include_router(router)
     application.include_router(profile_router)
+    application.include_router(context_router)
+    application.include_router(location_router)
+    application.include_router(restaurants_router)
     return application
 
 

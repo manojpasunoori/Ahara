@@ -10,6 +10,9 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", extra="ignore", enable_decoding=False)
 
     app_env: str = "development"
+    ahara_mode: str = "live"
+    places_provider: str = "foursquare"
+    foursquare_api_key: str = ""
     api_host: str = "0.0.0.0"
     api_port: int = 8000
     api_version: str = "0.1.0"
