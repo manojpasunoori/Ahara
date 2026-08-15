@@ -1,0 +1,1 @@
+# Agent orchestration`n`nCommit 6 adds typed stateless LangGraph orchestration. Commit 7 will add tools; Commit 8 recommendation intelligence.`n`n```mermaid`nflowchart TD`n START --> Intent[Extract Intent]`n Intent -->|success| Plan[Plan Context]`n Intent -->|failure| Finalize[Finalize]`n Plan --> Ready[Evaluate Readiness]`n Ready --> Finalize`n Finalize --> END`n```

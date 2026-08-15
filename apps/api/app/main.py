@@ -10,6 +10,7 @@ from app.api.context import router as context_router
 from app.api.location import router as location_router
 from app.api.restaurants import router as restaurants_router
 from app.api.ai import router as ai_router
+from app.api.agent import router as agent_router
 from app.core.cache import create_redis_client
 from app.core.config import get_settings
 from app.core.database import create_database_engine
@@ -45,6 +46,7 @@ def create_app() -> FastAPI:
     application.include_router(location_router)
     application.include_router(restaurants_router)
     application.include_router(ai_router)
+    application.include_router(agent_router)
     return application
 
 
